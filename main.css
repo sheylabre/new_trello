@@ -1,0 +1,423 @@
+/** Ajustes generales
+ */
+    /* Aplicable a todos los elementos
+        (1) El tamaño del elemento incluye el contenido, el padding y el margin
+        (2) el font family se hereda del elemento padre (parent)
+        (3) El texto se convierte en multilinea cuando el texto largo que el
+            ancho del contenedor
+        (4) Ningun elemento presenta bordes ni decoraciones cuando esta activo
+            (esta selecionado por el mouse)
+        (5) Hereda el box-sizing del elemento padre (parent).
+        */
+    * {
+        box-sizing: border-box;  /* 1 */
+        font-family: inherit;  /* 2 */
+        white-space: normal;  /* 3 */
+        outline: none;  /* 4 */
+    }
+
+    *:focus {
+        outline: none;  /* 4 */
+    }
+
+    *::before,
+    *::after {
+        box-sizing: inherit;  /* 5 */
+    }
+
+/** Disposicion general de emelentos en la pagina
+ */
+    /* Aplicable al elemento html
+        (1) Necesario para que el elemento html tenga el ancho del navegador
+        (2) Necesario para que el elemento html tenga el alto del navegador
+        (3) El tamaño de fuente es el 100% del tamaño base predefinido por el
+            navegador, habitualmente 16px
+        */
+    html {
+        height: 100%;  /* 1 */
+        width: 100%;  /* 2 */
+        font-size: 100%; /* 3 */
+        font-family: sans-serif;
+    }
+
+    /* Aplicable al elemento body
+        (1) Eliminamos el margin que por defecto tiene el elemento body
+        (2) Necesario para que ocupe toda el area del elemento html
+        */
+    body {
+        margin: 0;  /* 1 */
+        height: 100%; /* 2 */
+        width: 100%; /* 2 */
+        background-color: #4BBF6B;
+    }
+
+    /* Aplicable al elemento header
+        (1) Posicion fija en la pantalla
+        (2) Pegado a la parte superior
+        (3) Pegado a la parte izquierda
+        (4) Pegado a la parte derecha
+        (5) Necesario para que el header este por encima de cualquier otro
+            elemento, cualuqie numero grande es suficiente :)
+        */
+    header {
+        position: fixed;  /* 1 */
+        top: 0;  /* 2 */
+        left: 0;  /* 3 */
+        right: 0;  /* 4 */
+        z-index:  100000;  /* 5 */
+        height: 40px;
+    }
+
+    /* Aplicable al elemento #trelo, la imagen dentor del header
+        (1) Necesario para que ocupe toda el area del elemento header
+        */
+    #trello{
+        width: 100%;  /* 1 */
+        height: 100%;  /* 1 */
+    }
+
+    /* Un elemento contenedor externo para colocar dentro el contenedor de listas
+        (1) Necesario para que ocupe toda el area del elemento body
+        (2) Para guardar el espacio ocupado por el header de forma que
+            cualquier contenido interior no sea obstruico por el header
+        (3) Prevenimos el scrolling en la direccion vertical (hidden)y lo
+            permitimos en la direccion horizontal
+        */
+    .contenedor-externo {
+        padding: 40px 0 0 0;  /* 1 */
+        width: 100%;  /* 2 */
+        height: 100%;  /* 2 */
+        overflow-y: hidden;  /* 3 */
+        overflow-x: auto;  /* 3 */
+    }
+
+    /* Un elemento contenedor interno para colocar dentro todas las listas
+        (1) El tamañao vertical es el mismo que el tamaño vertical del
+            contenedor externo
+        (2) El tamaño horizontal depende del tamaño del contendio que
+            coloquemos dentro
+        (3) Las listas que colocaremos dentro seran elementos de tipo
+            'inline-block', el tamaño horizontal de las listas sea mayor que el
+            ancho de la pantalla, esto evita que las listas salten a una nieva
+            linea (evitamos el 'wrapping')
+        */
+    .contenedor-externo .contenedor-interno {
+        height: 100%;  /* 1 */
+        width: auto;  /* 2 */
+        padding: 10px;
+        white-space: nowrap;  /* 3 */
+    }
+
+/** Listas
+ */
+    /* Estilos aplicables a las listas
+        (1) Las listas son del mismo alto que el contenedor de listas (el
+            elemento que anteriormente llamamos contenedor interno)
+        (2) Por defecto las listas no guardan ningun margen
+        (3) Añadimos un pequeño padding para que cuando el contendio de la lista
+            sea de mayor tamaño verical que la lista, el contenido este
+            separado de la barra de escroling que aparece a la derecha
+        (4) Prevenimos el scrolling en la direccion horizontal (hidden) y lo
+            permitimos en la direccion vertical (auto)
+        (5) Mostramos las listas como elementos 'inline-block' para poder
+            colocarlas una al lado de la otra.
+        (6) Todas las listas se encuentras alioneadas a la parte superior del
+            contenedor de listas (el elemento que anteriormente llamamos
+            contenedor interno)
+        */
+    .lista {
+        height: 100%;  /* 1 */
+        width: 250px;
+        margin: 0;  /* 2 */
+        padding-right: 5px;  /* 3 */
+        overflow-y: auto;  /* 4 */
+        overflow-x: hidden;  /* 4 */
+        display: inline-block;  /* 5 */
+        vertical-align: top;  /* 6 */
+    }
+
+    /* listas precedidas por listas
+        (1) toda lista que este a la derecha de otra lista se separa de esta
+            con un pequeño margen a la izquierda
+        */
+    .lista ~ .lista {
+        margin-left: 5px;
+    }
+
+/** Tarjetas
+ */
+    /* Estilos que aplican a las tarjetas
+        (1) Las tarjetas son del mismo ancho que la lista que las contiene
+        (2) Por defecto las listas no guardan ningun margen
+        */
+    .tarjeta {
+        width: 100%;  /* 1 */
+        height: auto;
+        margin: 0;  /* 2 */
+        padding: 10px;
+        display: block;
+        background-color: #FFFFFF;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    /* tarjetas precedidas por tarjetas
+        (1) toda lista que este debajo de otra tarjeta se separa de esta
+            con un pequeño margen a superior
+        */
+    .tarjeta ~ .tarjeta {
+        margin-top: 10px;
+    }
+
+    /* Una tarjeta puede tener un título en forma de 'h1' o en forma de 'input'
+        */
+    .tarjeta h1.titulo,
+    .tarjeta input.titulo {
+        font-size: 18px;
+        line-height: 1.25;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Cuando el titulo esta en forma de 'input' se muestra como un bloque
+        */
+    .tarjeta input.titulo {
+        width: 100%;
+        display: block;
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #D7D9DB;
+    }
+
+    /* Una tarjeta puede tener un texto en forma de 'p' o en forma de 'div' */
+    .tarjeta p.texto,
+    .tarjeta div.texto {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+        line-height: 1.25;
+    }
+
+    /* Cuando el texto esta en forma de 'div' debe tenrer estilos parecidos a
+        un 'input'
+        */
+    .tarjeta div.texto {
+        width: 100%;
+        height: auto;
+        min-height: 72px;
+        padding: 10px;
+        background-color: #D7D9DB;
+        border-radius: 5px;
+    }
+
+    /* las tarjetas debe tener una seccion de accion donde colocaremos los
+        botones para un menu de guardar y cancelar  (mas adelante definiremos
+        los estilos de los botones)
+        (1) La seccionde accion se separa del resto de contenido de la tarjeta
+            por un margen superior
+        (2) La seccion de accion es siempre se muestra como un 'block'
+        (3) Colocaremos un pequeño padding a la izquierda (mas adelante haremos
+            unpequeño truco para que este padding sea la separacion entre
+            botones)
+        */
+    .tarjeta .accion {
+        margin-top: 10px;  /* 1 */
+        display: block;  /* 2 */
+        padding-left: 10px;  /* 3 */
+    }
+
+    /* Los botones dentro del panel de accion:
+        (1) tiene un ancho del 50% del blpoque de accion sin considerar el
+            'padding' anterior que tiene el bloque
+        (2) Flotan hacia la izquierda
+        */
+    .tarjeta .accion .boton {
+        width: 50%;  /* 1 */
+        float: left;
+        font-size: 15px;
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+    /*  El primer boton de accion tiene un margen por la izquieda de -10px lo
+        cual lo ubica al extremo del bloque de accion como si el padding de
+        10px que el bloque de 'accion' tiene no existiera. Estos 10px tambien se
+        colocan como margen para separarlo del otro boton de accion que se
+        colocará dando asi dos botones separados por 10px sin importar el ancho
+        del bloque de accion y ocupando el 50% del tamaño del bloque de accion
+        menos 5px cada uno.
+        */
+    .tarjeta .accion .boton:first-child {
+        margin-left: -10px;
+        margin-right: 10px;
+    }
+
+    /* Ademas del bloque de accion, cada tarjeta tendra un menu para crear
+        nuevas tarjetas.
+        (1) Con esto anulamos el paddin de la tarjeta en la parte derecha,
+            izquieda e inferior y separamos el creador de tarjetas de los demas
+            elementos por un m,argen superior.
+        */
+    .tarjeta .creador-de-tarjetas {
+        margin:  10px -10px -10px -10px;  /* 1 */
+        padding: 10px;
+        font-size: 12px;
+        text-align: center;
+        color: #999999;
+        display: block;
+        cursor: pointer;
+    }
+
+    .tarjeta .creador-de-tarjetas:hover {
+        background-color: #C0C0C0;
+        text-decoration: underline;
+        color: #373737;
+    }
+
+/** Botones
+ */
+    /* Estilos de los botones */
+    .boton {
+        font-size: 18px;
+        line-height: 1.25;
+        padding: 10px;
+        border-radius: 5px;
+        color: #E2E4E6;
+        text-align: left;
+        cursor: pointer;
+        border: 0;
+        display: block;
+    }
+
+    /* Un boton grande que ocupa el tamaño total horizontal del elemento que
+        lo contiene
+        */
+    .boton-grande {
+        width: 100%;
+    }
+
+/** Texto de error
+ */
+    /* Un bloque de texto que servira para señalar errores */
+    .error-text {
+        display: block;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #FF0000;
+    }
+
+/** Elementos Auxiliares
+ */
+    /* elementos con borde */
+    .con-borde {
+        border:2px solid;
+    }
+
+    /* elementos ocultos */
+    .oculto {
+        display: none!important;
+        overflow: hidden!important;
+    }
+
+    /* Colores de fondo */
+    .gris {
+        background-color: #C0C1C3;
+    }
+
+    .verde-oscuro {
+        background-color: #42A95E;
+    }
+
+    .verde-claro {
+        background-color: #5DB349;
+    }
+
+    /* Color de forndo oscurecido cuando se hace hover */
+    .hover-oscuro:hover {
+        background-color: rgba(0,0,0,.3);
+    }
+
+    /* Colores de borde */
+    .borde-gris {
+        border-color: #C0C1C3;
+    }
+
+    .borde-verde-oscuro {
+        border-color: #42A95E;
+    }
+
+    .borde-verde-claro {
+        border-color: #5DB349;
+    }
+
+/** Antiguo CSS (comentado pa' no perderlo)
+ */
+    /*
+    #borde{
+        border:2px solid #42A95E;
+        background-color: #42A95E;
+        color: #E2E4E6;
+        font-size: 18px;
+        padding: 10px 130px 10px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #conten{
+        margin-left: 5px;
+    }
+
+    #borde:hover{
+        background-color: rgba(0,0,0,.3);
+    }
+
+    #formulario{
+        padding: 6px;
+        background-color:#E2E4E6;
+        width: 20%;
+        display: none;
+        border-radius: 5px;
+        margin-left: 5px;
+    }
+
+    #contenido{
+        border:2px solid #C0C1C3;
+        background-color: #D7D9DB;
+        font-size: 15px;
+        padding: 8px 60px 8px 10px;
+        border-radius: 5px;
+    }
+
+    #boton{
+        background-color: #5DB349;
+        color: white;
+        border-radius: 5px;
+        padding: 7px 20px;
+        margin: 5px;
+        font-size: 15px;
+        border:2px solid #5DB349;
+    }
+
+    .spancreado{
+        padding: 10px 0px 10px 2px;
+        background-color:#E2E4E6;
+        width: 20%;
+        border-radius:5px 5px 0px 0px;
+        display: block;
+    }
+
+    .spancreado2{
+        background-color:#E2E4E6;
+        padding: 5px 153px 10px 10px;
+        border-radius: 0px 0px 5px 5px;
+        color: #999999;
+        cursor: pointer;
+    }
+
+    .spancreado2:hover{
+        background-color: #C0C0C0;
+        text-decoration: underline;
+        color: #373737;
+    }
+    */
